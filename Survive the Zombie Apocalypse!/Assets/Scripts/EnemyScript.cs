@@ -1,32 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyScript : MonoBehaviour
 {
-    [SerializeField] protected GameObject Player;
     Coroutine playerCollide;
     protected float damage, speed;
+    public GameObject player;
+
+    public GameObject Player {
+        get { return player; }
+        set { player = value; } 
+    }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(Player.transform.position.x, Player.transform.position.y, 0f), speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, player.transform.position.y, 0f), speed * Time.deltaTime);
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
+        //when the enemy is now colliding with the player
         if (collision.gameObject.name.Contains("Player"))
         {
-            playerCollide = StartCoroutine(DamagePlayer());
+            if(playerCollide == null) playerCollide = StartCoroutine(DamagePlayer());
         }
-
-        //StopCoroutine(playerCollide);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        StopCoroutine(playerCollide);
+        //when the enemy is no longer colliding with the player
+        if (collision.gameObject.name.Contains("Player"))
+        {
+            //Debug.Log("collision exit");
+            if (playerCollide != null) StopCoroutine(playerCollide);
+        }
     }
 
     IEnumerator DamagePlayer()

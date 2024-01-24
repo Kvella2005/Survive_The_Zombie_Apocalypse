@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Zombie2 : EnemyScript
 {
+    [SerializeField] EnemySO enemyAttributes;
+
     void Start()
     {
-        damage = 5f;
-        speed = 10f;
+        damage = enemyAttributes.damage;
+        speed = enemyAttributes.speed;
     }
     // Update is called once per frame
     protected override void Update()

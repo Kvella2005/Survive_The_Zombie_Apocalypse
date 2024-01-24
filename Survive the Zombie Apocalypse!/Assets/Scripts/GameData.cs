@@ -7,6 +7,7 @@ public abstract class GameData : MonoBehaviour
     private static int GameScore;
     private static float health;
     private static int coins;
+    private static int killCount;
 
     public static int gameScore
     {
@@ -24,5 +25,11 @@ public abstract class GameData : MonoBehaviour
     {
         get { return coins; }
         set { coins = value; }
+    }
+
+    public static int PlayerKillCount
+    {
+        get { return killCount; }
+        set { killCount = value; }
     }
 }

@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Zombie1 : EnemyScript
 {
+    [SerializeField] EnemySO enemyAttributes;
 
     // Start is called before the first frame update
     void Start()
     {
-        damage = 15f;
-        speed = 5f;
+        damage = enemyAttributes.damage;
+        speed = enemyAttributes.speed;
     }
 
     // Update is called once per frame

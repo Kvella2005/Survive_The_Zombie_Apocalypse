@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,18 +6,18 @@ using UnityEngine;
 
 public class ObjectPooling : MonoBehaviour
 {
-    public List<GameObject> pooledObjects;
-    public GameObject poolingObject;
+    //public static ObjectPool SharedInstance;
+    private List<GameObject> pooledObjects;
+    public GameObject objectToPool;
+    public int amountToPool;
 
-    public int PoolCount = 20;
-
-    // Start is called before the first frame update
     void Start()
     {
         pooledObjects = new List<GameObject>();
-        for (int i = 0; i < PoolCount; i++)
+        GameObject tmp;
+        for (int i = 0; i < amountToPool; i++)
         {
-            GameObject tmp = Instantiate(poolingObject);
+            tmp = Instantiate(objectToPool);
             tmp.SetActive(false);
             tmp.transform.SetParent(this.transform);
             pooledObjects.Add(tmp);
@@ -25,7 +26,7 @@ public class ObjectPooling : MonoBehaviour
 
     public GameObject GetPooledObject()
     {
-        for (int i = 0; i < PoolCount; i++)
+        for (int i = 0; i < amountToPool; i++)
         {
             if (!pooledObjects[i].activeInHierarchy)
             {

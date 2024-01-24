@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     Vector2 movementDirection;
     bool move;
     Animator animator;
+    Coroutine playerCollide;
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,4 +44,27 @@ public class Player : MonoBehaviour
             move = false;
         }
     }
+    /*protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name.Contains("Player"))
+        {
+            playerCollide = StartCoroutine(DamagePlayer());
+        }
+
+        //StopCoroutine(playerCollide);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        StopCoroutine(playerCollide);
+    }
+
+    IEnumerator DamagePlayer()
+    {
+        while (true)
+        {
+            Debug.Log("Player Hit");
+            yield return new WaitForSeconds(1f);
+        }
+    }*/
 }
